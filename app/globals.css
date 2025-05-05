@@ -1,8 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f1923;
+  --foreground: #e6e6e6;
+  --aws-orange: #FF9900;
+  --aws-dark-blue: #232F3E;
+  --aws-light-blue: #1A73E8;
+  --aws-hover-blue: #0D47A1;
+  --aws-q-purple: #7b34dd;
+  --aws-q-cyan: #00c2cb;
+  --aws-q-dark: #0f1923;
+  --aws-q-light: #e6e6e6;
 }
 
 @theme inline {
@@ -12,15 +20,132 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.category-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(123, 52, 221, 0.3);
+  background: linear-gradient(135deg, rgba(15, 25, 35, 0.9), rgba(15, 25, 35, 0.7));
+  backdrop-filter: blur(10px);
+}
+
+.category-card.active:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(123, 52, 221, 0.5);
+  border: 1px solid var(--aws-q-purple);
+}
+
+.aws-button {
+  background: linear-gradient(90deg, var(--aws-q-purple), var(--aws-q-cyan));
+  color: white;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.aws-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--aws-q-cyan), var(--aws-q-purple));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.aws-button:hover:before {
+  opacity: 1;
+}
+
+.aws-link {
+  color: var(--aws-q-cyan);
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  position: relative;
+}
+
+.aws-link:hover {
+  color: var(--aws-q-purple);
+  text-shadow: 0 0 8px rgba(0, 194, 203, 0.5);
+}
+
+.aws-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: linear-gradient(90deg, var(--aws-q-purple), var(--aws-q-cyan));
+  transition: width 0.3s ease;
+}
+
+.aws-link:hover::after {
+  width: 100%;
+}
+
+.aws-header {
+  background-color: rgba(15, 25, 35, 0.8);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--aws-q-purple);
+}
+
+.glow-text {
+  text-shadow: 0 0 10px rgba(123, 52, 221, 0.5), 0 0 20px rgba(0, 194, 203, 0.3);
+}
+
+/* Cyberpunk scanlines effect */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 15;
+}
+
+.scanlines:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.05) 51%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+/* Card slider styles */
+.card-slider {
+  perspective: 1000px;
+}
+
+.card-slider-track {
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease-out;
+}
+
+.slider-nav-button {
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+
+.slider-nav-button:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(123, 52, 221, 0.5);
 }
